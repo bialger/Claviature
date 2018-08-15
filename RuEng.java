@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 /*
-Version 1.0
+Version 1.1
 by Alexander Bigulov
 2018.08.15
 */
@@ -21,8 +21,8 @@ class RuEng implements ActionListener, ListSelectionListener{
 	JScrollPane comboBox;
 	JLabel jlab2 = new JLabel ("");
 	JLabel jlab3 = new JLabel ("В случае возникновения проблемы пишите issue на https://github.com/bialger/Claviature");
-	JLabel jlab4 = new JLabel (items[1]);
-	JLabel jlab5 = new JLabel (items[0]);
+	JLabel jlab4 = new JLabel (items[0]);
+	JLabel jlab5 = new JLabel (items[1]);
 	JLabel jlab6 = new JLabel ("Результат:");
 	JLabel jlab7 = new JLabel ("");
 //Standart construction for Swing
@@ -37,7 +37,7 @@ JLabel jlab1 = new JLabel ("Введите тескт в нужное поле, 
 jlst = new JList<String>(items);
 jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 comboBox = new JScrollPane(jlst);
-
+jfrm.getContentPane().setBackground( Color.green );
 //Setting action commands for text fields
 jtf1.setActionCommand ("tf1");
 jtf1.addActionListener(this);
@@ -47,9 +47,9 @@ jtf2.addActionListener(this);
 jfrm.add(jlab1);
 jfrm.add(jlab3);
 jfrm.add(jlab4);
-jfrm.add(jtf2);
-jfrm.add(jlab5);
 jfrm.add(jtf1);
+jfrm.add(jlab5);
+jfrm.add(jtf2);
 jfrm.add(jlab6);
 jfrm.add(jlabRes);
 jfrm.add(jlab2);
