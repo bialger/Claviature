@@ -3,8 +3,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.Color;
 /*
-Version 1.1
+Version 1.1.5
 by Alexander Bigulov
 2018.08.15
 */
@@ -14,33 +15,41 @@ class RuEng implements ActionListener, ListSelectionListener{
 	        "1. С русской расскладки на английскую",
 	        "2. С английской расскладки на русскую"
 	    };
+	String[] colors = {
+	        "Красный",
+	        "Зелёный",
+		    "Жёлтый",
+		    "Голубой",
+		    "Фиолетово",
+		    "Бисквитный",
+			"Розовый"
+	    };
 	JTextField jtf1 = new JTextField (100);
 	JTextField jtf2 = new JTextField (100);
 	JTextField jlabRes = new JTextField ("");
-	JList<String> jlst;
-	JScrollPane comboBox;
-	JLabel jlab2 = new JLabel ("");
+	JList<String> jlst = new JList<String>(colors);
+	JLabel jlab2 = new JLabel ("Выберите цвет фона");
 	JLabel jlab3 = new JLabel ("В случае возникновения проблемы пишите issue на https://github.com/bialger/Claviature");
 	JLabel jlab4 = new JLabel (items[0]);
 	JLabel jlab5 = new JLabel (items[1]);
 	JLabel jlab6 = new JLabel ("Результат:");
 	JLabel jlab7 = new JLabel ("");
+	JFrame jfrm = new JFrame ("Переводчик раскладки");
 //Standart construction for Swing
 RuEng(){
-JFrame jfrm = new JFrame ("Переводчик раскладки");
 //Layout - table 5*2
 jfrm.setLayout (new GridLayout (5,2));
 //Size - full screen
 jfrm.setSize (2000, 1000);
 jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 JLabel jlab1 = new JLabel ("Введите тескт в нужное поле, затем нажмите ENTER. Результат появится в нижнем поле.");
-jlst = new JList<String>(items);
-jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-comboBox = new JScrollPane(jlst);
 jfrm.getContentPane().setBackground( Color.green );
+jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 //Setting action commands for text fields
 jtf1.setActionCommand ("tf1");
 jtf1.addActionListener(this);
+//comboBox.setListSelectionCommand ("tf1");
+jlst.addListSelectionListener(this);
 jtf2.setActionCommand ("tf2");
 jtf2.addActionListener(this);
 //Making anything that we need visible
@@ -53,19 +62,41 @@ jfrm.add(jtf2);
 jfrm.add(jlab6);
 jfrm.add(jlabRes);
 jfrm.add(jlab2);
-//jfrm.add(jlab7);
+jfrm.add(jlst);
 jfrm.setVisible(true);
 
 
 }
 //Setting answers
 int idx;
-public void valueChanged(ListSelectionEvent e) {
+public void valueChanged(ListSelectionEvent le) {
 	idx = jlst.getSelectedIndex();
 	if(idx != -1){
         //I wanted to do it with something like ComboBox, but... something... went wrong
-	}else {
-		jlab2.setText("ОШИБКА: выберите одну из опций");
+		//UPD: I understood! But I don't want change logic, and did it like this:
+		switch (idx){
+			case 0:
+				jfrm.getContentPane().setBackground( Color.red );
+				break;
+			case 1:
+				jfrm.getContentPane().setBackground( Color.green );
+				break;
+			case 2:
+				jfrm.getContentPane().setBackground( Color.yellow );
+				break;
+			case 3:
+				jfrm.getContentPane().setBackground( Color.cyan );
+				break;
+			case 4:
+				jfrm.getContentPane().setBackground( new java.awt.Color(128, 0, 128) );
+				break;
+			case 5:
+				jfrm.getContentPane().setBackground(new java.awt.Color(255, 226, 196));
+				break;
+			case 6:
+				jfrm.getContentPane().setBackground(new java.awt.Color(255, 105, 180));
+				break;				
+		}
 	}
 }
 
