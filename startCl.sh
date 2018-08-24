@@ -1,2 +1,2 @@
 #! /bin/bash
-java RuEng
+java -cp ~/clav/ RuEng
